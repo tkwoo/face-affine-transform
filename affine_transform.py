@@ -11,6 +11,10 @@ args = parser.parse_args()
 net = cv2.dnn.readNetFromCaffe('./models/deploy.prototxt.txt', './models/res10_300x300_ssd_iter_140000.caffemodel')
 landmark_predictor = dlib.shape_predictor('./models/shape_predictor_68_face_landmarks.dat')
 
+# cv2.imshow("show", np.zeros((50,50,3)))
+# cv2.waitKey(100)
+# cv2.destroyAllWindows()
+
 def adjust_gamma(image, gamma=1.0):
     # build a lookup table mapping the pixel values [0, 255] to
     # their adjusted gamma values
@@ -90,8 +94,9 @@ time = (cv2.getTickCount() - start) / cv2.getTickFrequency() * 1000
 print ('elapsed time: %.2fms'%time)
 
 for landmark in list_landmarks:
-    pts_origin = np.float32([landmark[30], landmark[48], landmark[8], landmark[54])
-    
+    print (landmark[30], type(landmark[30]))
+    # pts_origin = np.float32([landmark[30], landmark[48], landmark[8], landmark[54])
+    exit()
 
 ### draw rectangle bbox
 if args.with_draw == 'True':
