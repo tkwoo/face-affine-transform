@@ -94,9 +94,16 @@ time = (cv2.getTickCount() - start) / cv2.getTickFrequency() * 1000
 print ('elapsed time: %.2fms'%time)
 
 for landmark in list_landmarks:
-    print (landmark[30], type(landmark[30]))
-    # pts_origin = np.float32([landmark[30], landmark[48], landmark[8], landmark[54])
-    exit()
+    
+    pts_origin = np.float32([landmark[30], landmark[48], landmark[8], landmark[54]])
+
+    pts_target = np.float32([[150,0], [0,150], [150,330], [300,150]])
+
+    M = cv2.getPerspectiveTransform(pts_origin, pts_target)
+    dst = cv2.warpPerspective(img_origin, M, (300,330))
+
+    cv2.imshow('dst', dst)
+    
 
 ### draw rectangle bbox
 if args.with_draw == 'True':
